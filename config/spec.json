@@ -1,0 +1,161 @@
+{
+  "route": {
+    "question": "What is the user asking this crypto market assistant to do?",
+    "options": {
+      "list_assets": "List which crypto assets are available on the board.",
+      "get_price": "Look up the current price (and optional return) for one asset.",
+      "compare_returns": "Compare returns across two or more assets over a window.",
+      "top_movers": "Show the biggest gainers or losers over a window.",
+      "market_summary": "Summarize the whole board over a window.",
+      "volatility": "Report how volatile an asset has been over a window.",
+      "none": "Not a read-only market query (trading execution, buy/sell, unrelated chat, or unsupported)."
+    }
+  },
+  "functions": {
+    "list_assets": {
+      "description": "List available crypto assets.",
+      "arguments": {}
+    },
+    "get_price": {
+      "description": "Current price for one asset.",
+      "arguments": {
+        "asset": {
+          "shape": "choice",
+          "question": "Which single crypto asset should the price be shown for?",
+          "options": {
+            "BTC": "BTC cryptocurrency",
+            "ETH": "ETH cryptocurrency",
+            "SOL": "SOL cryptocurrency",
+            "XRP": "XRP cryptocurrency",
+            "DOGE": "DOGE cryptocurrency",
+            "AVAX": "AVAX cryptocurrency",
+            "LINK": "LINK cryptocurrency",
+            "ADA": "ADA cryptocurrency"
+          }
+        },
+        "window": {
+          "shape": "choice",
+          "question": "Over what lookback window should the return next to the price be computed?",
+          "stated": "Does the user mention a time window, period, or lookback for the price/return?",
+          "options": {
+            "1d": "the past day / today / 24 hours",
+            "1w": "the past week / seven days",
+            "1mo": "the past month / thirty days",
+            "3mo": "the past quarter / three months"
+          }
+        }
+      }
+    },
+    "compare_returns": {
+      "description": "Compare returns for a set of assets.",
+      "arguments": {
+        "assets": {
+          "shape": "set",
+          "question": "Does the user want {} included in the return comparison?",
+          "options": {
+            "BTC": "BTC cryptocurrency",
+            "ETH": "ETH cryptocurrency",
+            "SOL": "SOL cryptocurrency",
+            "XRP": "XRP cryptocurrency",
+            "DOGE": "DOGE cryptocurrency",
+            "AVAX": "AVAX cryptocurrency",
+            "LINK": "LINK cryptocurrency",
+            "ADA": "ADA cryptocurrency"
+          }
+        },
+        "window": {
+          "shape": "choice",
+          "question": "Over what window should the returns be compared?",
+          "stated": "Does the user mention a comparison window or period?",
+          "options": {
+            "1d": "the past day / today / 24 hours",
+            "1w": "the past week / seven days",
+            "1mo": "the past month / thirty days",
+            "3mo": "the past quarter / three months"
+          }
+        },
+        "normalize": {
+          "shape": "flag",
+          "question": "Should returns be normalized to a common starting point (indexed to 100)?",
+          "stated": "Does the user ask to normalize, rebase, or index the comparison?"
+        }
+      }
+    },
+    "top_movers": {
+      "description": "Biggest gainers or losers.",
+      "arguments": {
+        "window": {
+          "shape": "choice",
+          "question": "Over what window should movers be ranked?",
+          "stated": "Does the user mention a window for movers (today, this week, etc.)?",
+          "options": {
+            "1d": "the past day / today / 24 hours",
+            "1w": "the past week / seven days",
+            "1mo": "the past month / thirty days",
+            "3mo": "the past quarter / three months"
+          }
+        },
+        "direction": {
+          "shape": "choice",
+          "question": "Does the user want the biggest gainers or the biggest losers?",
+          "stated": "Does the user specify gainers/winners/up or losers/down/dump?",
+          "options": {
+            "gainers": "assets that rose the most",
+            "losers": "assets that fell the most"
+          }
+        }
+      }
+    },
+    "market_summary": {
+      "description": "Board-wide market summary.",
+      "arguments": {
+        "window": {
+          "shape": "choice",
+          "question": "Over what window should the market summary cover?",
+          "stated": "Does the user mention a window for the market summary?",
+          "options": {
+            "1d": "the past day / today / 24 hours",
+            "1w": "the past week / seven days",
+            "1mo": "the past month / thirty days",
+            "3mo": "the past quarter / three months"
+          }
+        }
+      }
+    },
+    "volatility": {
+      "description": "Volatility for one asset.",
+      "arguments": {
+        "asset": {
+          "shape": "choice",
+          "question": "Which crypto asset should volatility be reported for?",
+          "options": {
+            "BTC": "BTC cryptocurrency",
+            "ETH": "ETH cryptocurrency",
+            "SOL": "SOL cryptocurrency",
+            "XRP": "XRP cryptocurrency",
+            "DOGE": "DOGE cryptocurrency",
+            "AVAX": "AVAX cryptocurrency",
+            "LINK": "LINK cryptocurrency",
+            "ADA": "ADA cryptocurrency"
+          }
+        },
+        "window": {
+          "shape": "choice",
+          "question": "Over what window should volatility be measured?",
+          "stated": "Does the user mention a volatility lookback window?",
+          "options": {
+            "1d": "the past day / today / 24 hours",
+            "1w": "the past week / seven days",
+            "1mo": "the past month / thirty days",
+            "3mo": "the past quarter / three months"
+          }
+        },
+        "annualized": {
+          "shape": "flag",
+          "question": "Should volatility be annualized?",
+          "stated": "Does the user ask for annualized volatility?"
+        }
+      }
+    }
+  }
+}
